@@ -1,0 +1,1 @@
+# simplelink_cc32xx_sdk_3_40_00_05
