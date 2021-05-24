@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IAR Project Connection File -->
+
+<iarProjectConnection version="1.8" name="tcpechotls" oneShot="true"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema"
+  xsi:noNamespaceSchemaLocation="IarProjectConnection_1.8.xsd">
+
+  <device>
+    <name>CC3220S</name>
+  </device>
+
+  <includePath>
+    <path>$PROJ_DIR$</path>
+    <path>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/net/bsd</path>
+    <path>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source</path>
+    <path>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/posix/iar</path>
+  </includePath>
+
+  <defines>
+  </defines>
+
+  <extraOptions>
+      <arg></arg>
+      <arg>-f$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/kernel/tirtos/builds/CC3235S_LAUNCHXL/release/iar/compiler.opt.defs</arg>
+      <arg>--debug</arg>
+      <arg>--silent</arg>
+      <arg>-e</arg>
+      <arg>--aeabi</arg>
+      <arg>--thumb</arg>
+      <arg>--diag_suppress=Pa050</arg>
+  </extraOptions>
+
+  <asmIncludePath>
+    <path>$PROJ_DIR$</path>
+  </asmIncludePath>
+
+  <asmDefines>
+  </asmDefines>
+
+  <linkerFile>
+    <override>true</override>
+    <path>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/tirtos/iar/CC3235S_LAUNCHXL_TIRTOS.icf</path>
+  </linkerFile>
+
+  <linkerExtraOptions>
+    <args>
+      <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/net/lib/iar/m4/slnetsock_release.a</arg>
+      <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/net/sntp/lib/iar/m4/sntp_release.a</arg>
+      <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/drivers/net/wifi/slnetif/iar/Release/slnetifwifi.a</arg>
+      <arg>-f$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/kernel/tirtos/builds/CC3235S_LAUNCHXL/release/iar/linker.cmd</arg>
+      <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/display/lib/display.arm4</arg>
+      <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/grlib/lib/iar/m4/grlib.a</arg>
+      <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/third_party/spiffs/lib/iar/m4/spiffs.a</arg>
+      <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/drivers/lib/drivers_cc32xx.arm4</arg>
+      <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/third_party/fatfs/lib/iar/m4/fatfs.a</arg>
+      <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/drivers/net/wifi/iar/rtos/simplelink.a</arg>
+      <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/kernel/tirtos/packages/ti/dpl/lib/dpl_cc32xx.arm4</arg>
+      <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/devices/cc32xx/driverlib/iar/Release/driverlib.a</arg>
+      <arg>--silent</arg>
+      <arg>--cpu=Cortex-M4</arg>
+    </args>
+  </linkerExtraOptions>
+
+  <customBuildTools>
+    <customBuildTool atRoot="true" name="SysConfig"> <!-- Custom build tool for entire project-->
+        <fileExtensions>.syscfg</fileExtensions>
+        <command>$SYSCONFIG_ROOT$/sysconfig_cli.bat -o $PROJ_DIR$ -s "$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/.metadata/product.json" --compiler iar $FILE_PATH$
+        </command>
+        <output>
+            <path>SysConfig_Generated_Files.ipcf</path>
+        </output>
+        <hasPrio>true</hasPrio> <!-- true: run this tool before all other tools-->
+    </customBuildTool>
+  </customBuildTools>
+
+  <heaps>
+    <heap> <!-- If omitted, id="0" -->
+      <size>0</size>
+    </heap>
+    <heap id="1">
+      <size>0</size>
+    </heap>
+  </heaps>
+  <stacks>
+    <stack> <!-- If omitted, id="0" -->
+      <size>512</size>
+    </stack>
+  </stacks>
+
+  <preBuild>
+    <command>iarbuild.exe $SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/kernel/tirtos/builds/CC3235S_LAUNCHXL/release/iar/tirtos_builds_CC3235S_LAUNCHXL_release.ewp Debug -log all</command>
+  </preBuild>
+
+  <postBuild>
+    <command>ielftool.exe --bin --verbose "$PROJ_DIR$/Debug/Exe/$PROJ_FNAME$.out" "$PROJ_DIR$/Debug/Exe/$PROJ_FNAME$.bin"</command>
+  </postBuild>
+  <files>
+      <path copyTo="$PROJ_DIR$/startsntp.c">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/startsntp.c</path>
+      <path copyTo="$PROJ_DIR$/common.syscfg">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/common.syscfg</path>
+      <path copyTo="$PROJ_DIR$/main_tirtos.c">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/tirtos/main_tirtos.c</path>
+      <path copyTo="$PROJ_DIR$/README.md">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/README.md</path>
+      <path copyTo="$PROJ_DIR$/tcpEchoTLS.c">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/tcpEchoTLS.c</path>
+      <path copyTo="$PROJ_DIR$/README.html">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/README.html</path>
+      <path copyTo="$PROJ_DIR$/platform.c">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/platform.c</path>
+      <path reference="$PROJ_DIR$/Board.html">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/boards/CC3235S_LAUNCHXL/Board.html</path>
+      <path copyTo="$PROJ_DIR$/CC3235S_LAUNCHXL_TIRTOS.icf">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/tirtos/iar/CC3235S_LAUNCHXL_TIRTOS.icf</path>
+    <group name="certs">
+      <path copyTo="$PROJ_DIR$/certs/certificate.h">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/certs/certificate.h</path>
+      <path copyTo="$PROJ_DIR$/certs/caCert.pem">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/certs/caCert.pem</path>
+      <path copyTo="$PROJ_DIR$/certs/caKey.pem">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/certs/caKey.pem</path>
+      <path copyTo="$PROJ_DIR$/certs/serverCert.pem">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/certs/serverCert.pem</path>
+      <path copyTo="$PROJ_DIR$/certs/serverKey.pem">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3235S_LAUNCHXL/ns/tcpechotls/certs/serverKey.pem</path>
+    </group>
+  </files>
+</iarProjectConnection>

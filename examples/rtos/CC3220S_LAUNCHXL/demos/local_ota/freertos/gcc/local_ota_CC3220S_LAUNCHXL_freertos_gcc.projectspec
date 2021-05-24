@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="Cortex M.CC3220S"
+            />
+        </when>
+    </applicability>
+
+    <import spec="${COM_TI_SIMPLELINK_CC32XX_SDK_INSTALL_DIR}/kernel/freertos/builds/CC3220S_LAUNCHXL/release/gcc/freertos_builds_CC3220S_LAUNCHXL_release_gcc.projectspec"/>
+
+    <project
+        title="Local-OTA Demo"
+        name="local_ota_CC3220S_LAUNCHXL_freertos_gcc"
+        toolChain="GNU"
+        connection="TIXDS110_Connection.xml"
+        device="Cortex M.CC3220S"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        references="freertos_builds_CC3220S_LAUNCHXL_release_gcc"
+        requiredVariables="FREERTOS_INSTALL_DIR"
+        compilerBuildOptions="
+            -I${PROJECT_ROOT}
+            -I${PROJECT_ROOT}/${ConfigName}
+            -DCC32XX
+            -I${COM_TI_SIMPLELINK_CC32XX_SDK_INSTALL_DIR}/source
+            -I${COM_TI_SIMPLELINK_CC32XX_SDK_INSTALL_DIR}/source/ti/posix/gcc
+            -I${FREERTOS_INSTALL_DIR}/FreeRTOS/Source/include
+            -I${FREERTOS_INSTALL_DIR}/FreeRTOS/Source/portable/GCC/ARM_CM3
+            -I${WORKSPACE_LOC}/freertos_builds_CC3220S_LAUNCHXL_release_gcc
+            -mcpu=cortex-m4
+            -march=armv7e-m
+            -mthumb
+            -mfloat-abi=soft
+            -ffunction-sections
+            -fdata-sections
+            -g
+            -gstrict-dwarf
+            -Wall
+            -I${CG_TOOL_ROOT}/arm-none-eabi/include/newlib-nano
+            -I${CG_TOOL_ROOT}/arm-none-eabi/include
+        "
+        compilerBuildOptions_c="-std=c99"
+        compilerBuildOptions_cpp="-std=c++11"
+        linkerBuildOptions="
+             -L${COM_TI_SIMPLELINK_CC32XX_SDK_INSTALL_DIR}/source/ti/utils/json/lib
+             -l:gcc/m4/json_release.a
+             -L${COM_TI_SIMPLELINK_CC32XX_SDK_INSTALL_DIR}/source
+             -l:ti/display/lib/display.am4g
+             -l:ti/grlib/lib/gcc/m4/grlib.a
+             -l:third_party/spiffs/lib/gcc/m4/spiffs.a
+             -l:ti/drivers/lib/drivers_cc32xx.am4g
+             -l:third_party/fatfs/lib/gcc/m4/fatfs.a
+             -L${COM_TI_SIMPLELINK_CC32XX_SDK_INSTALL_DIR}/source/ti/drivers/net/wifi
+             -l:gcc/rtos/simplelink.a
+             -L${WORKSPACE_LOC}/freertos_builds_CC3220S_LAUNCHXL_release_gcc/Debug
+             -l:libfreertos_builds_CC3220S_LAUNCHXL_release_gcc.a
+             -l:ti/devices/cc32xx/driverlib/gcc/Release/driverlib.a
+             -march=armv7e-m
+             -mthumb
+             -nostartfiles
+             -static
+             -Wl,--gc-sections
+             -L${CG_TOOL_ROOT}/arm-none-eabi/lib/thumb/v7e-m
+             -L${CG_TOOL_ROOT}/arm-none-eabi/lib
+             -lgcc
+             -lc
+             -lm
+             -lnosys
+             --specs=nano.specs
+        "
+        preBuildStep="
+        "
+        postBuildStep="
+        "
+        enableHexTool="true"
+        hexBuildOptions="-O binary"
+        enableSysConfigTool="true"
+        sysConfigBuildOptions="--product ${COM_TI_SIMPLELINK_CC32XX_SDK_INSTALL_DIR}/.metadata/product.json"
+        description="A demo of local OTA">
+
+        <property name="buildProfile" value="release"/>
+        <property name="isHybrid" value="true"/>
+        <group id="local_ota.SIMPLELINK_CC32XX_SDK.CC3220S_LAUNCHXL.demos.GCC"/>
+        <file path="../../uart_term.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../uart_term.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../local_ota.syscfg" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../freertos/main_freertos.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../ota_report_server_task.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../ota_json.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../local_ota_task.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../local_ota.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../ota_report_server_task.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../platform.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../ota_archive.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../local_ota_task.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../link_local_task.h" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../README.md" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../local_ota.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../ota_archive.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../README.html" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../link_local_task.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../platform.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../ota_json.c" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="../../freertos/gcc/CC3220S_LAUNCHXL_FREERTOS.lds" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+        <file path="${COM_TI_SIMPLELINK_CC32XX_SDK_INSTALL_DIR}/source/ti/boards/CC3220S_LAUNCHXL/Board.html" openOnCreation="false" excludeFromBuild="false" action="link">
+        </file>
+    </project>
+</projectSpec>
+

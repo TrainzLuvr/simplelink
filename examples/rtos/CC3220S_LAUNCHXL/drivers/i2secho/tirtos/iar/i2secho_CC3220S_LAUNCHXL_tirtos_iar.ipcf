@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IAR Project Connection File -->
+
+<iarProjectConnection version="1.2" name="I2S Echo" oneShot="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="IarProjectConnection_1.2.xsd">
+
+    <device>
+        <name>CC3220S</name>
+    </device>
+
+    <asmIncludePath>
+        <path>$PROJ_DIR$</path>
+    </asmIncludePath>
+
+    <includePath>
+        <path>$PROJ_DIR$</path>
+        <path>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source</path>
+        <path>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/posix/iar</path>
+    </includePath>
+
+    <extraOptions>
+        <args>
+            <arg>-f$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/kernel/tirtos/builds/CC3220S_LAUNCHXL/release/iar/compiler.opt.defs</arg>
+            <arg>--debug</arg>
+            <arg>--silent</arg>
+            <arg>-e</arg>
+            <arg>--aeabi</arg>
+            <arg>--thumb</arg>
+            <arg>--diag_suppress=Pa050</arg>
+        </args>
+    </extraOptions>
+
+    <linkerFile>
+        <override>true</override>
+        <path>$PROJ_DIR$/CC3220S_LAUNCHXL_TIRTOS.icf</path>
+    </linkerFile>
+
+    <linkerExtraOptions>
+        <args>
+            <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/display/lib/display.arm4</arg>
+            <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/grlib/lib/iar/m4/grlib.a</arg>
+            <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/third_party/spiffs/lib/iar/m4/spiffs.a</arg>
+            <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/drivers/lib/drivers_cc32xx.arm4</arg>
+            <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/third_party/fatfs/lib/iar/m4/fatfs.a</arg>
+            <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/kernel/tirtos/packages/ti/dpl/lib/dpl_cc32xx.arm4</arg>
+            <arg>-f$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/kernel/tirtos/builds/CC3220S_LAUNCHXL/release/iar/linker.cmd</arg>
+            <arg>$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/devices/cc32xx/driverlib/iar/Release/driverlib.a</arg>
+            <arg>--silent</arg>
+            <arg>--cpu=Cortex-M4</arg>
+        </args>
+    </linkerExtraOptions>
+
+    <customBuildTools>
+        <customBuildTool atRoot="true" name="SysConfig"> <!-- Custom build tool for entire project-->
+            <fileExtensions>.syscfg</fileExtensions>
+            <command>$SYSCONFIG_ROOT$/sysconfig_cli.bat -o $PROJ_DIR$ -s "$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/.metadata/product.json" --compiler iar $FILE_PATH$
+            </command>
+            <output>
+                <path>SysConfig_Generated_Files.ipcf</path>
+            </output>
+            <hasPrio>true</hasPrio> <!-- true: run this tool before all other tools-->
+        </customBuildTool>
+    </customBuildTools>
+
+    <heaps>
+        <heap> <!-- If omitted, id="0" -->
+            <size>0</size>
+        </heap>
+        <heap id="1">
+            <size>0</size>
+        </heap>
+    </heaps>
+    <stacks>
+        <stack> <!-- If omitted, id="0" -->
+            <size>512</size>
+        </stack>
+    </stacks>
+
+    <preBuild>
+        <command>iarbuild.exe $SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/kernel/tirtos/builds/CC3220S_LAUNCHXL/release/iar/tirtos_builds_CC3220S_LAUNCHXL_release.ewp Debug -log all</command>
+    </preBuild>
+
+    <files>
+        <path copyTo="$PROJ_DIR$/i2secho.c">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3220S_LAUNCHXL/drivers/i2secho/i2secho.c</path>
+        <path copyTo="$PROJ_DIR$/README.md">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3220S_LAUNCHXL/drivers/i2secho/README.md</path>
+        <path copyTo="$PROJ_DIR$/README.html">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3220S_LAUNCHXL/drivers/i2secho/README.html</path>
+        <path copyTo="$PROJ_DIR$/AudioCodec.c">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3220S_LAUNCHXL/drivers/i2secho/AudioCodec.c</path>
+        <path copyTo="$PROJ_DIR$/AudioCodec.h">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3220S_LAUNCHXL/drivers/i2secho/AudioCodec.h</path>
+        <path copyTo="$PROJ_DIR$/TI3254.h">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3220S_LAUNCHXL/drivers/i2secho/TI3254.h</path>
+        <path copyTo="$PROJ_DIR$/overview.rov.json">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3220S_LAUNCHXL/drivers/i2secho/overview.rov.json</path>
+        <path copyTo="$PROJ_DIR$/main_tirtos.c">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3220S_LAUNCHXL/drivers/i2secho/tirtos/main_tirtos.c</path>
+        <path copyTo="$PROJ_DIR$/i2secho.syscfg">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3220S_LAUNCHXL/drivers/i2secho/tirtos/i2secho.syscfg</path>
+        <path reference="$PROJ_DIR$/Board.html">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/source/ti/boards/CC3220S_LAUNCHXL/Board.html</path>
+        <path copyTo="$PROJ_DIR$/CC3220S_LAUNCHXL_TIRTOS.icf">$SIMPLELINK_CC32XX_SDK_INSTALL_DIR$/examples/rtos/CC3220S_LAUNCHXL/drivers/i2secho/tirtos/iar/CC3220S_LAUNCHXL_TIRTOS.icf</path>
+    </files>
+</iarProjectConnection>
